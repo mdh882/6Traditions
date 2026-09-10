@@ -1,0 +1,135 @@
+HOW TO EDIT THE TRADITION INVENTORY
+Politics & Values, Pt. 1
+
+
+WHAT YOU NEED
+
+A plain-text editor with line numbers. BBEdit and Visual Studio Code are both
+free and both fine. Do not edit the file in Word, and note that TextEdit will
+try to render index.html as a web page rather than show you the code.
+
+To see a change before publishing it: save the file, then open or reload it in a
+browser.
+
+To publish a change: save the file, open GitHub Desktop, write a line saying what
+you changed, click Commit to main, then click Push origin. The live site at
+sixtraditions.mdhamilton.com updates about a minute later.
+
+
+THE TWO BLOCKS
+
+Open index.html. Near the top are two blocks of ordinary text,
+each introduced by a long comment. Everything you would normally want to change
+is in one of them.
+
+  BLOCK 1   The six traditions: names, colors, emoji, epigrams, the two strands
+            of each, the paragraph a reader gets, authors, unit dates, criticism.
+            The "voices", "unit" and "tension" fields are no longer shown on the
+            results page. They are kept in the file in case you want them back.
+
+  BLOCK 2   The twenty-four questions and their answers.
+
+There is also a page showing all six traditions at once, in the order they
+appear in Block 1, which is the order of the syllabus. It is built from the same
+"tag" and "body" lines, so editing a tradition there updates both places. Readers
+reach it from a small link under their result, and it has its own address:
+sixtraditions.mdhamilton.com/#traditions
+
+Below the blocks is the opening screen, which is ordinary page text: the title,
+the lede, the "How it works" note and the "What this is not" note. Change the
+words and leave the angle-bracket tags alone.
+
+Everything after the line marked "Machinery" is working code, including the
+results screen and the share card. Send changes to those my way rather than
+editing them in place.
+
+
+EDITING A QUESTION
+
+A question is any line starting with Q:
+
+    Q: What is actually worth conserving?
+
+An answer is any line containing a double colon:
+
+    not being interfered with :: lib 3 [market]
+
+The code says which tradition the answer belongs to. The number is the points.
+The word in square brackets is the strand, and it is optional.
+
+Each tradition also has an emoji, set in Block 1 on a line like:
+
+    emoji: 🗽
+
+It appears beside the tradition on the results page and on the share card. To
+change one, paste a different emoji there. Nothing else needs to change.
+
+The six codes are:
+
+    chr   Christianity          strands: prophetic, ordered
+    rep   republicanism         strands: participatory, institutional
+    lib   liberalism            strands: market, social
+    blk   Black radicalism      strands: independent, coalitional
+    fem   feminism              strands: citizenship, structural
+    con   conservatism          strands: prudential, foundational
+
+Rewording a question or an answer needs nothing else changed. To retire a
+question, put a # at the front of each of its lines.
+
+
+FOUR DESIGN RULES, AND WHY THEY MATTER
+
+The first draft of this quiz was measurably biased. These four rules are what
+fixed it, and breaking one will bring the problem back.
+
+  1. EVERY ANSWER LOADS EXACTLY ONE TRADITION.
+     In the first draft, answers scoring two traditions at once made feminism
+     and Black radicalism impossible to separate: a reader answering as a pure
+     feminist scored 75 out of 100 on Black radicalism. Now every answer belongs
+     to one tradition and the same test returns 39.
+
+  2. ALL SIX TRADITIONS HAVE THE SAME CEILING.
+     Each appears in exactly 15 of the 24 questions and owns exactly 16 of the
+     96 answers, so the most any one can earn is 45 points. Equal ceilings are
+     what make the six scores comparable. If you add an answer for one
+     tradition, take one away from it somewhere else.
+
+  3. THE SIX "INSIDE THE TRADITION" QUESTIONS STAY ONE PER TRADITION.
+     Six questions put two answers from the same tradition against each other,
+     one for each of its strands. There is exactly one of these per tradition.
+     Two for the same tradition would give it extra chances to score.
+
+  4. ANSWER ORDER DOES NOT MATTER, BECAUSE THE PAGE SHUFFLES IT.
+     Order is randomized for every reader. Write the answers in whatever order
+     is convenient.
+
+After any edit, run the checker:
+
+    python3 analyze.py
+
+It reads the file, prints the ceilings, and simulates two hundred thousand
+readers. Every tradition should finish first close to 16.7 percent of the time.
+If one is at 20 percent, something in rules 1 to 3 has slipped.
+
+
+IF YOU MAKE A MISTAKE
+
+The page will not go blank. A red box at the top lists every line it could not
+read, quotes the line, and says what it expected. Fix, save, reload.
+
+The likely mistakes:
+
+  1. Forgetting the double colon on an answer line.
+  2. Writing the score as a word or with no space, as in "chr three" or "chr3".
+     It must be a code, a space, then a digit.
+  3. A tradition code or a strand name that does not exist. The message lists
+     the ones it knows.
+
+Apostrophes, quotation marks, accents and curly quotes are all safe anywhere in
+the text.
+
+
+KEEPING A BACKUP
+
+Before a big round of edits, duplicate the file and rename the copy something
+like index_BACKUP.html.
